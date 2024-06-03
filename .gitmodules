@@ -1,0 +1,3 @@
+[submodule "backend/chat-app"]
+	path = backend/chat-app
+	url = https://github.com/BowenAnna/chat_app2
