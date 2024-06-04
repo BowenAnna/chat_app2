@@ -1,0 +1,28 @@
+.App {
+  height: 100vh;
+  width: 100%;
+}
+
+#root {
+  height: 100vh;
+  width: 100%;
+}
+
+.messages {
+  height: 60%;
+  overflow-y: scroll;
+  padding: 0 20px;
+
+  margin: 10% auto 0 auto;
+  width: 80%;
+}
+
+.messageForm {
+  height: 10%;
+  width: 100%;
+}
+
+
+
+
+
