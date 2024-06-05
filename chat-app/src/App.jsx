@@ -56,15 +56,16 @@ function App() {
   const handleSubmit = async(e)=>{
     e.preventDefault();
     const body = e.target.message.value;
-  e.target.message.value = ""
+    e.target.message.value = " "
 
-  const response = await fetch("http://localhost:3000/messages", {
+ await fetch("http://localhost:3000/messages", {
     method: "POST",
+    body: JSON.stringify({body }),
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ body }),
   });  
+  console.log({body})
 };
 
   const fetchMessages=async()=>{
