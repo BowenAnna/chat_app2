@@ -7,6 +7,11 @@ function App() {
   const [guid, setGuid] = useState(" ");
   const messagesContainer = document.getElementById("messages");
 
+  const setMessagesAndScrollDown = (data) => {
+    setMessages(data);
+    resetScroll();
+  };
+
   ws.onopen = () => {
     console.log("Connected to the websocket server");
 
@@ -54,16 +59,11 @@ function App() {
   };
 
   const fetchMessages = async () => {
-    const response = await fetch("/http://localhost:3000/messages", {
+    const response = await fetch("http://localhost:3000/messages", {
       method: "GET",
     });
     const data = await response.json();
     setMessagesAndScrollDown(data);
-  };
-
-  const setMessagesAndScrollDown = (data) => {
-    setMessages(data);
-    resetScroll();
   };
 
   const resetScroll = () => {
