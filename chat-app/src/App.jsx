@@ -75,7 +75,6 @@ function App() {
     <div className="App">
       <div className="messageHeader">
         <h1>Messages</h1>
-        <p> Guid: {guid}</p>
       </div>
       <div className="messages" id="messages">
         {messages.map((message) => (

@@ -1,3 +1,0 @@
-[submodule "backend/chat-app"]
-	path = backend/chat-app
-	url = https://github.com/prettyalana/chat-app
