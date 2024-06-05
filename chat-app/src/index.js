@@ -8,13 +8,9 @@ import { BrowserRouter as Router } from 'react-router-dom';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-<<<<<<<< HEAD:chat-app/frontend/src/index.js
-    <Router>
-========
-     <Router>
->>>>>>>> eeeaa96dabc2c936115e233ac7e007dfe756b9a3:frontend/src/index.js
+     {/* <Router> */}
       <App />
-    </Router>
+    {/* </Router> */}
   </React.StrictMode>
 );
 
