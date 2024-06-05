@@ -1,12 +1,25 @@
+# class Message < ApplicationRecord
+#   after_create_commit { broadcast_message }
+
+#   private
+
+#   def broadcast_message
+#     ActionCable.server.broadcast("MessagesChannel", {
+#       id:,
+#       body:
+#     })
+#   end
+# end
+
 class Message < ApplicationRecord
   after_create_commit { broadcast_message }
 
   private
 
   def broadcast_message
-    Actionable.server.broadcast("MessagesChannel", {
-      id:,
-      body:
+    ActionCable.server.broadcast("MessagesChannel", {
+      id: self.id,
+      body: self.body
     })
   end
 end

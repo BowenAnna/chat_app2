@@ -45,15 +45,16 @@ function App() {
   const handleSubmit = async(e)=>{
     e.preventDefault();
     const body = e.target.message.value;
-  e.target.message.value = ""
+    e.target.message.value = " "
 
-  const response = await fetch("http://localhost:3000/messages", {
+ await fetch("http://localhost:3000/messages", {
     method: "POST",
+    body: JSON.stringify({body }),
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ body }),
   });  
+  console.log({body})
 };
 
   const fetchMessages=async()=>{
@@ -100,3 +101,65 @@ function App() {
 }
 
 export default App
+
+
+
+// import "./App.css";
+// import { Routes, Route, Navigate } from "react-router-dom";
+// import { useState, useRef, useEffect } from "react";
+// // import {getUser} from "./utilities/users-service";
+// // import * as itemsAPI from "./utilities/items-api";
+// //pages
+// // import Footer from "./components/Footer/Footer";
+// import Home from "../chat-app/src/pages/Home/Home";
+// import Chat from "../chat-app/src/pages/Chat/Chat";
+// function App() {
+//   const [user, setUser] = useState(getUser());
+//   const [activeCat, setActiveCat] = useState("");
+//   const [menuItems, setMenuItems] = useState([]);
+//   //Admin
+//   ////////////////////////////////////////////////////////////////////////////////////
+//   // const [role, setRole] = useState("");
+//   ////////////////////////////////////////////////////////////////////////////////////
+//   const categoriesRef = useRef([]);
+//   useEffect(function () {
+//     async function getItems() {
+//       const items = await itemsAPI.getAll();
+//       categoriesRef.current = items.reduce((cats, item) => {
+//         const cat = item.category.name;
+//         return cats.includes(cat) ? cats : [...cats, cat];
+//       }, []);
+//       setMenuItems(items);
+//       setActiveCat(categoriesRef.current[0]);
+//     }
+//     getItems();
+//   }, []);
+//   ///////////////////////////////////////////////////////////////////////////////////////
+//   // useEffect(() => {
+//   //   if (user) {
+//   //     setRole(user.role || "");
+//   //   }
+//   // }, [user]);
+//   ///////////////////////////////////////////////////////////////////////////////////////
+//   return (
+//     <div className="App">
+//        <Nav user={user} setUser={setUser} />
+//       <Routes>
+//       <Route path="/" element={<Home />} />
+//   {user? (
+//     <>
+//       <Route path="/" element={<Home />} />
+//       <Route path="/chat" element={<Chat user={user} setUser={setUser} />} />
+//     </>
+//   ) : (
+//     <>
+//       <Route path="/" element={<Home />} />
+//     </>
+//   )}
+// </Routes>
+// <Footer/>
+// </div>
+//   );
+// }
+
+// export default App;
