@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
-  before_action :set_message, only: %i[ show edit update destroy find_table ]
+  before_action :set_message, only: %i[ show edit update destroy]
 
   # GET /messages or /messages.json
   def index
@@ -51,7 +51,7 @@ class MessagesController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
