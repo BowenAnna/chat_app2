@@ -108,3 +108,7 @@ group :test do
   gem "rspec-html-matchers"
   gem "webmock"
 end
+
+group :production do
+  gem 'pg'
+end
