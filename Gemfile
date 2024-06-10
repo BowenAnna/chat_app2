@@ -108,6 +108,6 @@ group :test do
   gem "webmock"
 end
 
-group :production do
-  gem "pg", "~> 1.5.6"
-end
+# group :production do
+#   gem "pg", "~> 1.5.6"
+# end
