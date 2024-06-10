@@ -16,8 +16,6 @@
         width: 100px;
         height: 1000px;
         box-shadow: 4px 4px 4px #014670;
-        background-color: var(--base-color);
-        /* background-color: #eaeaea; */
         border-radius: 2vmin;
       }
     .Login input, .Login button {
