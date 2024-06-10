@@ -1,5 +1,5 @@
 [build]
-  command = "bundle install && npm run build"
+  command = "sudo apt-get update && sudo apt-get install -y libpq-dev && bundle install && npm run build"
   publish = "public" # Adjust this to your build output directory if different
 
 [context.production.environment]
