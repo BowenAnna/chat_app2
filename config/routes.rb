@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   resources :messages
   resources :login # comments
   devise_for :users
+
 end

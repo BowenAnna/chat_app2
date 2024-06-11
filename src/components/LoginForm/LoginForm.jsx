@@ -1,6 +1,14 @@
 import { useState } from "react";
 import * as usersService from "../../utilities/users-service";
 import styles from "./Login.module.css";
+import {
+  MDBBtn,
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBInput
+}
+from 'mdb-react-ui-kit';
 
 const LoginForm = ({ setUser }) => {
   const [credentials, setcredentials] = useState({
@@ -77,15 +85,7 @@ const LoginForm = ({ setUser }) => {
 
           <br />
           <button
-            style={{
-              width: "300px",
-              maxWidth: "300px",
-              backgroundColor: "--golden",
-              color: "#014670",
-              fontSize: "20px",
-              fontFamily:
-                "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif",
-            }}
+         
             type="submit"
             disabled={loading}
           >

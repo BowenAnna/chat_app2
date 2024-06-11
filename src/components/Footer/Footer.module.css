@@ -1,9 +1,14 @@
 .display{
     background-color: rgb(252, 143, 161);
-    height: 60px;
+    height: 90px;
 }
 
 p{
     margin: 0;
     padding: 0;
+}
+
+.inline{
+    display: flex;
+    justify-content: center;
 }

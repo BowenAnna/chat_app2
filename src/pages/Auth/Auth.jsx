@@ -20,7 +20,7 @@ export default function Auth({ setUser }) {
                   marginBottom: "0px",
                 }}
               >
-                Welcome to Chat App
+                Welcome to Chattik
               </h1>
             </div>
             <div className={styles.main}>
