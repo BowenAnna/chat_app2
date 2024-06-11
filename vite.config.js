@@ -3,10 +3,10 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  css: {
-    postcss: {
-      config: '/Users/alana/chat-app/backend/chat-app/postcss.config.js',
-    },
+  plugins: [react()],
+  base: '/',
+  build: {
+    outDir: 'dist',
   },
 });
 
