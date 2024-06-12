@@ -8,7 +8,7 @@
 
 require 'faker'
 
-number_of_users = 10
+number_of_users = 5
 
 number_of_users.times do
   password = Faker::Internet.password(min_length: 8)
