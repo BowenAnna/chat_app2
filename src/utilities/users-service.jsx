@@ -1,14 +1,21 @@
 import * as usersAPI  from './users-api';
+import axios from 'axios';
 
-export async function signUp(userData) {
-  // Delete the network request code to the
-  // users-api.js module which will ultimately
-  // return the JWT
-  const token = await usersAPI.signUp(userData);
-  // Persist the token to localStorage
-  localStorage.setItem('token', token);
-  return getUser();
-}
+// export async function signUp(userData) {
+//   // Delete the network request code to the
+//   // users-api.js module which will ultimately
+//   // return the JWT
+//   const token = await usersAPI.signUp(userData);
+//   // Persist the token to localStorage
+//   localStorage.setItem('token', token);
+//   return getUser();
+// }
+
+export const signUp = async (userData) => {
+  const response = await axios.post('http://localhost:3000/users', userData);
+  return response.data;
+};
+
 
 export async function logIn(credentials) {
   const token = await usersAPI.login(credentials);

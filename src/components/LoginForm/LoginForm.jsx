@@ -2,8 +2,6 @@ import { useState } from "react";
 import * as usersService from "../../utilities/users-service";
 import {
   MDBBtn,
-  MDBContainer,
-  MDBRow,
   MDBCol,
   MDBInput,
 } from "mdb-react-ui-kit";
@@ -96,6 +94,7 @@ const LoginForm = ({ setUser }) => {
           </MDBBtn>
         </div>
         </form>
+        <p className="error-message">&nbsp;{error}</p>
       </div>
      </MDBCol>
   );

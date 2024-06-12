@@ -1,3 +1,5 @@
+//SignUpForm.jsx
+
 import { useState } from "react";
 import { signUp } from "../../utilities/users-service.jsx";
 import { MDBBtn, MDBInput } from "mdb-react-ui-kit";
@@ -14,39 +16,41 @@ export const SignUpForm = ({ setUser }) => {
   });
 
   const [error, setError] = useState("");
-
+  
   const handleFormSubmit = async (event) => {
-    //this function called when form submitted
     event.preventDefault();
-    //prevents default refresh after form submit;
     try {
-      const userData = { ...formData };
-      delete userData.confirm;
-      // const user = {
-      //   name:formData.name,
-      //   email: formData.email,
-      //   password: formData.password
-      // }
-
-      // The promise returned by the signUp service method
-      // will resolve to the user object included in the
-      // payload of the JSON Web Token (JWT)
-      const user = await signUp(userData);
-      setUser(user);
+      const response = await fetch('http://localhost:3000/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          user: {
+            name: formData.name,
+            email: formData.email,
+            password: formData.password,
+            password_confirmation: formData.confirm,
+          },
+        }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setUser(data.user); // Adjust according to the response structure
+      } else {
+        setError(data.errors.join(', '));
+      }
     } catch (error) {
-      setError("Sign Up Failed -Try Again");
+      setError('Sign Up Failed - Try Again');
     }
   };
+  
 
   const handleFormChange = (event) => {
     //this function is called when form input changes
     setFormData({ ...formData, [event.target.name]: event.target.value });
     //this updates the formData state using spread operator and updating field corresponding to change input
   };
-
-  // useEffect(()=> {
-  //   console.log(formData);
-  // }, [formData]);
 
   const disable = formData.password !== formData.confirm;
   return (
@@ -116,7 +120,7 @@ export const SignUpForm = ({ setUser }) => {
           Register
         </MDBBtn>
       </form>
-      {/* <p className="error-message">&nbsp;{error}</p> */}
+      <p className="error-message">&nbsp;{error}</p>
     </div>
   );
 };
