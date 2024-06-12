@@ -1,10 +1,7 @@
 import React from 'react'
-import styles from './Footer.module.css'
 import {
   MDBFooter,
   MDBContainer,
-  MDBCol,
-  MDBRow,
   MDBIcon,
   MDBBtn
 } from 'mdb-react-ui-kit';

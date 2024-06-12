@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import {
-  MDBBtn
-} from 'mdb-react-ui-kit';
+import { MDBBtn } from 'mdb-react-ui-kit';
 import About from '../About/About';
 import { Link } from 'react-router-dom';
 
@@ -26,7 +24,6 @@ export default function Home() {
                 color='warning'
                 tag="a"
                 rounded
-                outline
                 size="lg"
                 rel="nofollow"
               >About</MDBBtn></Link>
@@ -37,9 +34,8 @@ export default function Home() {
                 color='warning'
                 tag="a"
                 rounded
-                outline
                 size="lg"
-              >Sign In</MDBBtn></Link>
+              >Sign Up</MDBBtn></Link>
               
             </div>
           </div>

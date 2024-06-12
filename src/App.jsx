@@ -16,30 +16,11 @@ import axios from 'axios';
 
 function App() {
   const [user, setUser] = useState(getUser());
-  // const [activeCat, setActiveCat] = useState("");
-  // const [menuItems, setMenuItems] = useState([]);
-  // const categoriesRef = useRef([]);
-
-
-  // useEffect(function () {
-  //   async function getItems() {
-  //     const items = await itemsAPI.getAll();
-  //     categoriesRef.current = items.reduce((cats, item) => {
-  //       const cat = item.category.name;
-  //       return cats.includes(cat) ? cats : [...cats, cat];
-  //     }, []);
-  //     setMenuItems(items);
-  //     setActiveCat(categoriesRef.current[0]);
-  //   }
-  //   getItems();
-  // }, []);
-
-
 
   return (
     <div className="App">
 
-       <Nav user={user} setUser={setUser} />
+      <Nav user={user} setUser={setUser} />
       <Routes>
       <Route path="/" element={<Home />} />
   {user? (
