@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./Nav.module.css";
 import UserLogOut from "../UserLogOut/UserLogOut";
-import Button from "react-bootstrap/Button";
 import { MDBBtn } from "mdb-react-ui-kit";
 
 export default function Nav({ user, setUser }) {

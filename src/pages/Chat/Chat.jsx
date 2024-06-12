@@ -1,5 +1,6 @@
 import { useState, useEffect} from 'react'
 import '../../App.css'
+import { MDBBtn } from 'mdb-react-ui-kit';
 
 const ws = new WebSocket("ws://localhost:3000/cable");
 function Chat() {
@@ -74,10 +75,14 @@ function Chat() {
   }
 
   return (
-  <div className='App'>
+    <div
+    id='intro-example'
+    className='p-5 text-center bg-image'
+    style={{ backgroundImage: "url('https://res.cloudinary.com/dxh60x8dq/image/upload/v1718146849/Chattik%20App/wp4410721_ltbdgm.jpg')", height: '100vh', backgroundSize: 'cover', backgroundPosition: 'center center' }}
+  >
     <div className='messageHeader'>
       <h1>Messages</h1>
-      <p> Guid: {guid}</p>
+      {/* <p> Guid: {guid}</p> */}
     </div>
     <div className='messages' id="messages">
       {

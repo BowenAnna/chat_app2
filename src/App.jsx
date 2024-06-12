@@ -9,9 +9,6 @@ import Footer from "./components/Footer/Footer";
 import Auth from "./pages/Auth/Auth";
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import axios from 'axios';
-
-
 
 
 function App() {
@@ -26,7 +23,8 @@ function App() {
   {user? (
     <>
       <Route path="/" element={<Home />} />
-      <Navigate path="/messages" element={<Chat user={user} setUser={setUser} />} />
+      <Route path="/messages" element={<Chat user={user} setUser={setUser} />} />
+      <Route path="/*" element={<Navigate to="/messages"/>}/>
     </>
   ) : (
     <>
