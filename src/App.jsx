@@ -30,6 +30,7 @@ function App() {
     <>
       <Route path="/" element={<Home />} />
       <Route path="/users" element={<Auth setUser={setUser} />} />
+      <Route path="/*" element={<Navigate to="/"/>}/>
     </>
   )}
 </Routes>
