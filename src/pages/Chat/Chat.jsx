@@ -103,10 +103,10 @@ function Chat({ user, setUser }) {
             >
               {messages.map((message) => (
                 <div
-                  className="message d-flex justify-content-between"
+                  className="message d-flex justify-content-start"
                   key={message.id}
                 >
-                  <p className="ms-5">{message.body}</p>
+                  <p className="ms-2 me-2 p-1">{message.body}</p>
                 </div>
               ))}
             </div>
