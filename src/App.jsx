@@ -30,7 +30,6 @@ function App() {
     <>
       <Route path="/" element={<Home />} />
       <Route path="/users" element={<Auth setUser={setUser} />} />
-      <Route path="/messages" element={<Chat user={user} setUser={setUser} />} /> {/*block this route later on*/}
     </>
   )}
 </Routes>

@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import "../../App.css";
 import { MDBBtn, MDBInputGroup } from "mdb-react-ui-kit";
+import "mdb-react-ui-kit/dist/css/mdb.min.css";
 
-function Chat() {
+function Chat({ user, setUser }) {
   const [messages, setMessages] = useState([]);
   const messagesContainer = useRef(null);
   const ws = useRef(null);
@@ -24,7 +25,12 @@ function Chat() {
 
     ws.current.onmessage = (e) => {
       const data = JSON.parse(e.data);
-      if (data.type === "ping" || data.type === "welcome" || data.type === "confirm_subscription") return;
+      if (
+        data.type === "ping" ||
+        data.type === "welcome" ||
+        data.type === "confirm_subscription"
+      )
+        return;
 
       if (data.message) {
         setMessages((prevMessages) => [...prevMessages, data.message]);
@@ -69,29 +75,61 @@ function Chat() {
 
   const resetScroll = () => {
     if (messagesContainer.current) {
-      messagesContainer.current.scrollTop = messagesContainer.current.scrollHeight;
+      messagesContainer.current.scrollTop =
+        messagesContainer.current.scrollHeight;
     }
   };
 
   return (
     <div
-      id='intro-example'
-      className='p-5 text-center bg-image d-flex justify-content-center'
-      style={{ backgroundImage: "url('https://res.cloudinary.com/dxh60x8dq/image/upload/v1718146849/Chattik%20App/wp4410721_ltbdgm.jpg')", height: '100vh', backgroundSize: 'cover', backgroundPosition: 'center' }}
+      id="intro-example"
+      className="p-5 text-center bg-image d-flex justify-content-center"
+      style={{
+        backgroundImage:
+          "url('https://res.cloudinary.com/dxh60x8dq/image/upload/v1718146849/Chattik%20App/wp4410721_ltbdgm.jpg')",
+        height: "100vh",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
     >
-      <div className='w-75 text-center'>
-        <div className='messages' id="messages" ref={messagesContainer}>
-          {messages.map((message) => (
-            <div className='message' key={message.id}>
-              <p>{message.body}</p>
+      <div className="w-75 text-right">
+        <div className="messages">
+        <div className="d-flex flex-row justify-content-end">
+          <div>
+            <div
+              className="small p-2 me-3 mb-1 text-white rounded-3" style={{backgroundColor:"#0da2ff"}}
+              id="messages"
+              ref={messagesContainer}
+            >
+              {messages.map((message) => (
+                <div
+                  className="message d-flex justify-content-between"
+                  key={message.id}
+                >
+                  <p className="ms-5">{message.body}</p>
+                </div>
+              ))}
             </div>
-          ))}
+            {/* <p className="small me-3 mb-3 rounded-3 text-muted">
+              <Time/>
+            </p>  will show the time at which the message was sent*/}
+          </div>
+          <p>{user.name}</p>
+        </div>
         </div>
         <div className="messageForm">
           <form onSubmit={handleSubmit}>
-            <MDBInputGroup className='mb-3'>
-              <input className='form-control' placeholder="Message" type='text' label="Message" name="message" />
-              <MDBBtn color="warning" type="submit">Send</MDBBtn>
+            <MDBInputGroup className="mb-3">
+              <input
+                className="form-control"
+                placeholder="Message"
+                type="text"
+                label="Message"
+                name="message"
+              />
+              <MDBBtn color="warning" type="submit">
+                Send
+              </MDBBtn>
             </MDBInputGroup>
           </form>
         </div>
@@ -101,3 +139,4 @@ function Chat() {
 }
 
 export default Chat;
+
