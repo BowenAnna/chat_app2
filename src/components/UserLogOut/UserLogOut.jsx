@@ -9,9 +9,9 @@ function handleLogOut() {
 
 return (
   <div>
-      <MDBBtn className='mx-2 rounded' rounded color='danger' onClick={handleLogOut}>
+      <button className='btn btn-rounded bg-danger text-white me-2' color='danger' onClick={handleLogOut}>
         Sign Out
-      </MDBBtn>
+      </button>
   </div>
 );
 }
