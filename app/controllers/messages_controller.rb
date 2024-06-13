@@ -21,11 +21,11 @@ class MessagesController < ApplicationController
 
   # POST /messages or /messages.json
   def create
-    @message = Message.new(message_params)
-    if @message.save
-      render json: @message, status: :created
+    message = Message.new(message_params)
+    if message.save
+      render json: message, status: :created
     else
-      render json: @message.errors, status: :unprocessable_entity
+      render json: message.errors, status: :unprocessable_entity
     end
   end
 
@@ -62,4 +62,4 @@ class MessagesController < ApplicationController
     def message_params
       params.require(:message).permit(:body)
     end
-end
+  end

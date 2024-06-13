@@ -1,108 +1,103 @@
-import { useState, useEffect} from 'react'
-import '../../App.css'
-import { MDBBtn } from 'mdb-react-ui-kit';
+import { useState, useEffect, useRef } from "react";
+import "../../App.css";
+import { MDBBtn, MDBInputGroup } from "mdb-react-ui-kit";
 
-const ws = new WebSocket("ws://localhost:3000/cable");
 function Chat() {
   const [messages, setMessages] = useState([]);
-  const[guid, setGuid] = useState(" ");
-  const messagesContainer = document.getElementById("messages");
+  const messagesContainer = useRef(null);
+  const ws = useRef(null);
 
-  ws.onopen=()=>{
-    console.log("Connected to the websocket server");
-    setGuid(Math.random().toString(36).substring(2,15));
+  useEffect(() => {
+    ws.current = new WebSocket("ws://localhost:3000/cable");
 
-    ws.send(
-      JSON.stringify({
-        command: "subscribe",
-        identifier: JSON.stringify(
-          {
-            id: guid,
-            channel: "MessagesChannel"
-          }
-        ),
-      })
-    );
-  };
+    ws.current.onopen = () => {
+      console.log("Connected to the websocket server");
+      ws.current.send(
+        JSON.stringify({
+          command: "subscribe",
+          identifier: JSON.stringify({
+            channel: "MessagesChannel",
+          }),
+        })
+      );
+    };
 
-  ws.onmessage = (e)=>{
-    const data= JSON.parse(e.data);
-    if(data.type ==="ping") return;
-    if(data.type ==="welcome") return;
-    if(data.type ==="confirm_subscription") return;
+    ws.current.onmessage = (e) => {
+      const data = JSON.parse(e.data);
+      if (data.type === "ping" || data.type === "welcome" || data.type === "confirm_subscription") return;
 
-    const message = data.message;
-    setMessagesAndScrollDown([...messages, message])
-  }
+      if (data.message) {
+        setMessages((prevMessages) => [...prevMessages, data.message]);
+      }
+    };
 
-  useEffect(()=>{
+    return () => {
+      if (ws.current) {
+        ws.current.close();
+      }
+    };
+  }, []);
+
+  useEffect(() => {
     fetchMessages();
-  }, [])
+  }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     resetScroll();
   }, [messages]);
 
-  const handleSubmit = async(e)=>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const body = e.target.message.value;
-    e.target.message.value = " "
+    const body = e.target.message.value.trim();
+    if (body === "") return;
+    e.target.message.value = "";
 
- await fetch("http://localhost:3000/messages", {
-    method: "POST",
-    body: JSON.stringify({body }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });  
-  console.log({body})
-};
+    await fetch("http://localhost:3000/messages", {
+      method: "POST",
+      body: JSON.stringify({ body }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
 
-  const fetchMessages=async()=>{
+  const fetchMessages = async () => {
     const response = await fetch("http://localhost:3000/messages");
     const data = await response.json();
-    setMessagesAndScrollDown(data);
-  }
-
-  const setMessagesAndScrollDown = (data)=>{
     setMessages(data);
-    resetScroll();
-  }
+  };
 
-  const resetScroll = ()=>{
-    if(!messagesContainer) return;
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-  }
+  const resetScroll = () => {
+    if (messagesContainer.current) {
+      messagesContainer.current.scrollTop = messagesContainer.current.scrollHeight;
+    }
+  };
 
   return (
     <div
-    id='intro-example'
-    className='p-5 text-center bg-image'
-    style={{ backgroundImage: "url('https://res.cloudinary.com/dxh60x8dq/image/upload/v1718146849/Chattik%20App/wp4410721_ltbdgm.jpg')", height: '100vh', backgroundSize: 'cover', backgroundPosition: 'center center' }}
-  >
-    <div className='messageHeader'>
-      <h1>Messages</h1>
-      {/* <p> Guid: {guid}</p> */}
+      id='intro-example'
+      className='p-5 text-center bg-image d-flex justify-content-center'
+      style={{ backgroundImage: "url('https://res.cloudinary.com/dxh60x8dq/image/upload/v1718146849/Chattik%20App/wp4410721_ltbdgm.jpg')", height: '100vh', backgroundSize: 'cover', backgroundPosition: 'center' }}
+    >
+      <div className='w-75 text-center'>
+        <div className='messages' id="messages" ref={messagesContainer}>
+          {messages.map((message) => (
+            <div className='message' key={message.id}>
+              <p>{message.body}</p>
+            </div>
+          ))}
+        </div>
+        <div className="messageForm">
+          <form onSubmit={handleSubmit}>
+            <MDBInputGroup className='mb-3'>
+              <input className='form-control' placeholder="Message" type='text' label="Message" name="message" />
+              <MDBBtn color="warning" type="submit">Send</MDBBtn>
+            </MDBInputGroup>
+          </form>
+        </div>
+      </div>
     </div>
-    <div className='messages' id="messages">
-      {
-        messages.map((message)=>(
-          <div className='message' key={message.id}>
-            <p>{message.body}</p>
-          </div>
-        ))
-      }
-    </div>
-    <div className="messageForm">
-      <form onSubmit={handleSubmit}>
-        <input className="messageInput" type="text" name="message"/>
-        <button className='messageButton' type="submit">
-          Send
-        </button>
-      </form>
-    </div>
-  </div>
-  )
+  );
 }
 
 export default Chat;

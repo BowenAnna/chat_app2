@@ -19,7 +19,7 @@ export default function Home() {
               <h1 className='mb-3'>Chat with your friends using Chattik</h1>
               <h5 className='mb-4'>Best &amp; free chat app</h5>
              
-                <Link to={'/about'} element={<About/>}> <MDBBtn
+                {/* <Link to={'/about'} element={<About/>}> <MDBBtn
                 className="me-1"
                 color='warning'
                 tag="a"
@@ -35,7 +35,7 @@ export default function Home() {
                 tag="a"
                 rounded
                 size="lg"
-              >Sign Up</MDBBtn></Link>
+              >Sign Up</MDBBtn></Link> */}
               
             </div>
           </div>
