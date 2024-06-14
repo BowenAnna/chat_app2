@@ -22,7 +22,8 @@ nav{
 
 .signin{
     background-color: orange;
-    border-radius: 8px;
+    border-radius: 5px;
+    border-color: beige;
 }
 
 .logo, .links4{

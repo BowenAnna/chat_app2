@@ -1,31 +1,30 @@
-import * as usersAPI  from './users-api';
+import axios from 'axios';
+import sendRequest from './send-request';
 
-export async function signUp(userData) {
-  // Delete the network request code to the
-  // users-api.js module which will ultimately
-  // return the JWT
-  const token = await usersAPI.signUp(userData);
-  // Persist the token to localStorage
-  localStorage.setItem('token', token);
-  return getUser();
-}
+const BASE_URL = 'http://localhost:3000/users';
 
-export async function logIn(credentials) {
-  const token = await usersAPI.login(credentials);
-  // Persist the token to localStorage
-  localStorage.setItem('token', token);
-  console.log('In users-service:', credentials);
-  return getUser();
-}
+export const signUp = async (userData) => {
+  const response = await axios.post(BASE_URL, userData);
+  return response.data;
+};
+
+export const logIn = async (credentials) => {
+  try {
+    const response = await axios.post('http://localhost:3000/users/login', { user: credentials });
+    const token = response.data.token;
+    localStorage.setItem('token', token);
+    return response.data.user;
+  } catch (error) {
+    console.error('Error logging in:', error);
+    throw error;
+  }
+};
 
 export function getToken() {
   const token = localStorage.getItem('token');
-  // getItem will return null if no key
   if (!token) return null;
   const payload = JSON.parse(atob(token.split('.')[1]));
-  // A JWT's expiration is expressed in seconds, not miliseconds
   if (payload.exp < Date.now() / 1000) {
-    // Token has expired
     localStorage.removeItem('token');
     return null;
   }
