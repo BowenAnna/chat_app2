@@ -1,11 +1,6 @@
-//LoginForm.jsx
 import { useState } from "react";
 import * as usersService from "../../utilities/users-service";
-import {
-  MDBBtn,
-  MDBCol,
-  MDBInput,
-} from "mdb-react-ui-kit";
+import styles from "./Login.module.css";
 
 const LoginForm = ({ setUser }) => {
   const [credentials, setcredentials] = useState({
@@ -52,52 +47,54 @@ const LoginForm = ({ setUser }) => {
   };
 
   return (
-    <MDBCol className="mt-5">
-      <div className="d-flex flex-column">
-        <div className="text-center">
-          <img
-            src="https://res.cloudinary.com/dxh60x8dq/image/upload/v1718062316/Chattik%20App/chat_logo_wso8id.png"
-            style={{ width: "60px" }}
-            alt="logo"
-          />
-          <h4 className="mt-1 mb-5 pb-1">Chattik</h4>
-        </div>
+    <div className={styles.Login}>
+      <div className="form-container">
         <form autoComplete="off" onSubmit={handleSubmit}>
-        <p>Please login to your account</p>
+          {/* <label>Email:</label> */}
 
-        <MDBInput
-          wrapperClass="mb-4"
-          label="Email address"
-          id="form1"
-          type="email"
-          name="email"
-          value={credentials.email}
-          onChange={handleChange}
-          required
-        />
-        <MDBInput
-          wrapperClass="mb-4"
-          label="Password"
-          id="form2"
-          type="password"
-          name="password"
-          value={credentials.password}
-          onChange={handleChange}
-          required
-        />
-        <div className="text-center pt-1 mb-5 pb-1">
-          <MDBBtn
-            className="w-100 gradient-custom-2 p-1"
-            style={{ backgroundColor: "orange" }} type="submit"
+          <input
+            style={{ width: "300px", maxWidth: "300px" }}
+            type="email"
+            name="email"
+            placeholder="email"
+            value={credentials.email}
+            onChange={handleChange}
+            required
+          />
+          <br />
+
+          {/* <label>Password:</label> */}
+
+          <input
+            style={{ width: "300px", maxWidth: "300px" }}
+            type="password"
+            name="password"
+            placeholder="password"
+            value={credentials.password}
+            onChange={handleChange}
+            required
+          />
+
+          <br />
+          <button
+            style={{
+              width: "300px",
+              maxWidth: "300px",
+              backgroundColor: "--golden",
+              color: "#014670",
+              fontSize: "20px",
+              fontFamily:
+                "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif",
+            }}
+            type="submit"
             disabled={loading}
           >
-           {loading ? "Logging in..." : "SIGN IN"}
-          </MDBBtn>
-        </div>
+            {loading ? "Logging in..." : "LOG IN"}
+          </button>
         </form>
-        <p className="error-message">&nbsp;{error}</p>
       </div>
-     </MDBCol>
+      <p className="error-message">&nbsp;{error}</p>
+    </div>
   );
 };
 
