@@ -4,6 +4,11 @@ import UserLogOut from "../UserLogOut/UserLogOut";
 import { MDBBtn } from "mdb-react-ui-kit";
 
 export default function Nav({ user, setUser }) {
+
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   return (
     <nav className={styles.nav}>
       <Link className={styles.logo} to="/">
@@ -14,7 +19,7 @@ export default function Nav({ user, setUser }) {
       </Link>
       {user ? (
         <>
-          <div className={styles.helloDiv}>Hello, {user.name}! </div>
+          <div className={styles.helloDiv}>Hello, {capitalizeFirstLetter(user.name)}! </div>
           <UserLogOut className={styles.links2} user={user} setUser={setUser} />
         </>
       ) : (

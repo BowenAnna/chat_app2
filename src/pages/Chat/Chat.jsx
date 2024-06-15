@@ -9,6 +9,10 @@ function Chat({ user, setUser }) {
   const ws = useRef(null);
 
   useEffect(() => {
+    fetchMessages();
+  }, []);
+
+  useEffect(() => {
     ws.current = new WebSocket("ws://localhost:3000/cable");
 
     ws.current.onopen = () => {
@@ -45,10 +49,6 @@ function Chat({ user, setUser }) {
   }, []);
 
   useEffect(() => {
-    fetchMessages();
-  }, []);
-
-  useEffect(() => {
     resetScroll();
   }, [messages]);
 
@@ -68,9 +68,14 @@ function Chat({ user, setUser }) {
   };
 
   const fetchMessages = async () => {
-    const response = await fetch("http://localhost:3000/messages");
-    const data = await response.json();
-    setMessages(data);
+    try {
+      const response = await fetch("http://localhost:3000/messages");
+      if (!response.ok) throw new Error("Failed to fetch messages");
+      const data = await response.json();
+      setMessages(data);
+    } catch (error) {
+      console.error("Error fetching messages:", error);
+    }
   };
 
   const resetScroll = () => {
@@ -79,6 +84,12 @@ function Chat({ user, setUser }) {
         messagesContainer.current.scrollHeight;
     }
   };
+
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
+
 
   return (
     <div
@@ -114,7 +125,7 @@ function Chat({ user, setUser }) {
               <Time/>
             </p>  will show the time at which the message was sent*/}
           </div>
-          <p>{user.name}</p>
+          <p>{capitalizeFirstLetter(user.name)}</p>
         </div>
         </div>
         <div className="messageForm">
@@ -139,4 +150,3 @@ function Chat({ user, setUser }) {
 }
 
 export default Chat;
-
