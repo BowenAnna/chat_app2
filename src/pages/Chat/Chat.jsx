@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import "../../App.css";
 import { MDBBtn, MDBInputGroup } from "mdb-react-ui-kit";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
+import FindUser from "../../components/FindUser/FindUser";
 
 function Chat({ user, setUser }) {
   const [messages, setMessages] = useState([]);
@@ -89,8 +90,6 @@ function Chat({ user, setUser }) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
-
-
   return (
     <div
       id="intro-example"
@@ -103,7 +102,8 @@ function Chat({ user, setUser }) {
         backgroundPosition: "center",
       }}
     >
-      <div className="w-75 text-right">
+      <FindUser/>
+      <div className="w-50 text-right">
         <div className="messages">
         <div className="d-flex flex-row justify-content-end">
           <div>
