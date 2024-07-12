@@ -3,7 +3,7 @@ import { MDBBtn, MDBInput } from "mdb-react-ui-kit";
 
 const FindUser = ({ onSelectUser }) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState(null); 
+  const [searchResults, setSearchResults] = useState(null); // Changed to null to store single user
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -14,13 +14,13 @@ const FindUser = ({ onSelectUser }) => {
       }
       const data = await response.json();
       if (data.length > 0) {
-        setSearchResults(data[0]); 
+        setSearchResults(data[0]); // Store only the first user found
       } else {
-        setSearchResults(null); 
+        setSearchResults(null); // Reset to null if no user found
       }
     } catch (error) {
       console.error("Error searching for users:", error);
-      setSearchResults(null); 
+      setSearchResults(null); // Reset to null on error
     }
   };
 
@@ -28,7 +28,7 @@ const FindUser = ({ onSelectUser }) => {
     if (searchResults) {
       onSelectUser(searchResults);
       setSearchQuery("");
-      setSearchResults(null); 
+      setSearchResults(null); // Clear search results after selecting user
     }
   };
 
