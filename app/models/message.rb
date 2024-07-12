@@ -20,14 +20,19 @@
 #  sender_id     (sender_id => users.id)
 #
 class Message < ApplicationRecord
+  # belongs_to :recipient, class_name: "User"
+  # belongs_to :sender, class_name: "User"
+
   after_create_commit { broadcast_message }
 
   private
 
   def broadcast_message
     ActionCable.server.broadcast("MessagesChannel", {
-      id:,
-      body:
+      id: id,
+      body: body,
+      # sender_id: sender_id,
+      # recipient_id: recipient_id
     })
   end
 end

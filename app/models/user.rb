@@ -40,6 +40,9 @@
 # end
 
 class User < ApplicationRecord
+  has_many :sent_messages, foreign_key: :sender_id, class_name: "Message", dependent: :destroy
+  has_many :replied_messages, foreign_key: :recipient_id, class_name: "Message"
+  
   has_secure_password
   # Validations
   validates :email, presence: true, uniqueness: true

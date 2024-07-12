@@ -1,10 +1,5 @@
 class UsersController < ApplicationController
-  def index
-    @users = User.all
-    render json: @users
-  end
 
-  ##################################
   def index
     if params[:search].present?
       @users = User.where("username LIKE ? OR email LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
@@ -14,7 +9,10 @@ class UsersController < ApplicationController
 
     render json: @users
   end
-  ##################################
+
+  def show
+    @user = User.find_by!(username: params.fetch(:username))
+  end
 
   def create
       @user = User.new(user_params)
