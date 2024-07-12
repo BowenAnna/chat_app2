@@ -23,5 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 
-#cache 
-tmp/
+# Ignore tmp files
+tmp
+
+# Ignore development.sqlite3
+db/development.sqlite3

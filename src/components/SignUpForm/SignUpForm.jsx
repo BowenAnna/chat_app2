@@ -11,6 +11,7 @@ export const SignUpForm = ({ setUser }) => {
     //using useState hook from 'react' to set the formData using a setFormData function; also initializes formData as object with form fields;
     name: "",
     email: "",
+    username: "",
     password: "",
     confirm: "",
   });
@@ -29,6 +30,7 @@ export const SignUpForm = ({ setUser }) => {
           user: {
             name: formData.name,
             email: formData.email,
+            username: formData.username,
             password: formData.password,
             password_confirmation: formData.confirm,
           },
@@ -84,6 +86,17 @@ export const SignUpForm = ({ setUser }) => {
           type="email"
           name="email"
           value={formData.email}
+          onChange={handleFormChange}
+          required
+        />
+         <MDBInput
+          wrapperClass="mb-4"
+          label="Your User Name"
+          size="lg"
+          id="form2"
+          type="text"
+          name="username"
+          value={formData.username}
           onChange={handleFormChange}
           required
         />
