@@ -25,3 +25,6 @@ dist-ssr
 
 # Ignore tmp files
 tmp
+
+# Ignore development.sqlite3
+db/development.sqlite3
